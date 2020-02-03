@@ -1,0 +1,358 @@
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script:700&display=swap');
+
+@import url('https://fonts.googleapis.com/css?family=Caveat:700&display=swap');
+
+@import url('https://fonts.googleapis.com/css?family=Exo+2&display=swap');
+
+$large-width: 900px;
+
+@mixin l {
+  @media (min-width: #{$large-width}) {
+    @content;
+  }
+}
+
+$-highlights: #f09d51;
+$-mainBlack: rgb(0, 0, 0);
+$-mainWhite: rgb(255, 255, 255);
+$-mainSpacing: 0.1rem;
+$-mainTransition: all 0.3s linear;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,body {
+  color: $-mainWhite;
+  background: #ede3d9;
+  font-family: 'Exo 2', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-touch-callout: none;
+  font-stretch: normal;
+  font-style: normal;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.wrapper{
+  position: relative;
+  height: auto;
+}
+
+//    Navbar
+
+.navbar {
+  position: fixed;
+  top: 0;
+  height: 60px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #FEFBF4;
+  z-index: 1;
+  -webkit-box-shadow: 0 4px 4px -2px #00000086;
+   -moz-box-shadow: 0 4px 4px -2px #00000086;
+        box-shadow: 0 4px 4px -2px #00000086;
+
+  &__center {
+    width: 100%;
+    height: 60px;
+    max-width: 1170px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+
+    .nav-icon {
+      font-size: 24px;
+    }
+
+    .fa-chevron-circle-left{
+      cursor: pointer;
+      &:hover{
+        color: $-mainWhite;
+      }
+    }
+
+    .titleLogo{
+      color: $-mainBlack;
+      font-family: 'Dancing Script', cursive;
+      font-size: 47px;
+      font-weight: 700;
+    }
+
+    .cart-btn {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .cart-items {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: $-highlights;
+      padding: 0 5px;
+      border-radius: 30%;
+      color: $-mainBlack;   
+    }
+  }
+}
+
+//    End of Navbar
+
+//    Products
+
+.products-center {
+  position: absolute;
+  top: 0px;
+  margin-top: 100px;
+  padding: 0;
+  left: 0px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  margin-bottom: 100px;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+
+  @include l {
+    padding: 0 10% 0 10%;
+  }
+}
+
+.product {
+  width: 310px;
+  height: 420px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  margin: 0 20px 0 20px;
+  margin-bottom: 50px;
+  background-color: #FEFBF4;
+  transition: 0.3s;
+  border-radius: 5px;
+
+  &:hover {
+    -webkit-box-shadow: 0px 0px 25px -8px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 25px -8px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 25px -8px rgba(0,0,0,0.75);   
+  }
+
+  &__Text{
+    height: auto;
+  }
+
+  h3 {
+    position: relative;
+    text-transform: capitalize;
+    font-size: 30px;
+    font-family: 'Caveat', cursive;
+    margin: 10px auto auto 10px;
+    color: #49605E;
+    letter-spacing: $-mainSpacing;
+    text-align: left;
+  }
+
+  h4 {
+    position: relative;
+    width: 200px;
+    text-transform: capitalize;
+    font-size: 1.1rem;
+    margin: 10px auto 10px 10px;
+    letter-spacing: $-mainSpacing;
+    text-align: left;
+    color: #49605E;
+  }
+  
+  &__img {
+    position: relative;
+    overflow: hidden;
+    right: 0;
+    width: 300px;
+    height: 300px;
+    margin: 5px 0 0 5px;
+    transition: $-mainTransition;
+  }
+
+  &__cart-btn {
+    width: 100%;
+    height:35px;
+    background: $-highlights;
+    border: none;
+    text-transform: uppercase;
+    border-radius: 0 0 5px 5px;
+    padding: 0.5rem 0.75rem;
+    letter-spacing: $-mainSpacing;
+    font-weight: bold;
+    transition: $-mainTransition;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.4);
+
+    .fa-shopping-cart {
+      margin-right: 0.5rem;
+    }
+
+    &:hover {
+      color: $-mainBlack;
+    }
+  }
+}
+
+//    End of Products
+
+//    Cart
+
+.cart-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  transition: $-mainTransition;
+  background: rgba(0, 0, 0, 0);
+  z-index: 2;
+  visibility: hidden;
+}
+
+.cart {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  z-index: 3;
+  background-image: url(../img/cartBackground.jpg);
+  background-size: 100%;
+  padding: 1.5rem;
+
+  &::-webkit-scrollbar { 
+    display: none; 
+  }
+
+  @include l {
+    width: 400px;
+    min-width: 450px;
+  }
+
+
+  .close-cart {
+    font-size: 1.7rem;
+    cursor: pointer;
+  }
+
+  h2 {
+    text-transform: capitalize;
+    text-align: center;
+    color: $-mainBlack;
+    width: 100%;
+    letter-spacing: $-mainSpacing;
+    margin-bottom: 2rem;
+  }
+
+}
+
+//    End of Cart
+
+//    Cart Item
+
+.cart-item {
+  display: grid;
+  align-items: center;
+  grid-template-columns: auto 1fr auto;
+  grid-column-gap: 1.5rem;
+  margin: 1.5rem 0;
+  background-color: #FEFBF4;
+  border-radius: 10px;
+
+  img {
+    width: 75px;
+    height: 75px;
+  }
+
+  h4 {
+    font-size: 0.85rem;
+    text-transform: capitalize;
+    letter-spacing: $-mainSpacing;
+    color: $-mainBlack;
+  }
+
+  h5 {
+    margin: 0.5rem 0;
+    letter-spacing: $-mainSpacing;
+    color: $-mainBlack;
+  }
+
+  .remove-item {
+    color: grey;
+    cursor: pointer;
+  }
+
+  .itemNumber{
+    margin-right: 10px;
+
+    &__amount {
+      text-align: center;
+      color: $-mainBlack;
+    }
+
+    .fa-chevron-up,
+    .fa-chevron-down {
+      color: $-highlights;
+      cursor: pointer;
+    }
+  }
+}
+
+//    End of Cart Item 
+
+//    Cart Footer
+
+.cart-footer {
+  margin-top: 2rem;
+  letter-spacing: $-mainSpacing;
+  text-align: center;
+  justify-content: center;
+
+  &__total{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    height: 50px;
+    background-color: #FEFBF4;
+    border-radius: 10px;
+
+    h3 {
+      margin: auto;
+      text-transform: capitalize;
+      height: auto;
+      color: $-mainBlack;
+    }
+  }
+
+  .banner-btn-clearCart{
+    padding: 1rem 3rem;
+    text-transform: uppercase;
+    letter-spacing: $-mainSpacing;
+    font-size: 1rem;
+    background: $-highlights;
+    color: $-mainWhite;
+    border: 1px solid $-highlights;
+    transition: $-mainTransition;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+}
+
+//    End of Cart Footer
+
+
+
